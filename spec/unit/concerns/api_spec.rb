@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Concerns::API do
+describe Force::Concerns::API do
   let(:response) { double('Faraday::Response', :body => double('Body')) }
 
   describe '.list_sobjects' do

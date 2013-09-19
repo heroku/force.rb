@@ -5,9 +5,9 @@ module MiddlewareExampleGroup
       let(:env)            { { :request_headers => {}, :response_headers => {} } }
       let(:retries)        { 3 }
       let(:options)        { { } }
-      let(:client)         { double(Restforce::AbstractClient) }
+      let(:client)         { double(Force::AbstractClient) }
       let(:auth_callback)  { double(Proc) }
-      let(:success_response) { Restforce::Mash.new(JSON.parse(fixture(:auth_success_response))) }
+      let(:success_response) { Force::Mash.new(JSON.parse(fixture(:auth_success_response))) }
       subject(:middleware) { described_class.new app, client, options }
     end
   end
@@ -56,7 +56,7 @@ shared_examples_for 'authentication middleware' do
       it 'raises an exception' do
         expect {
           middleware.authenticate!
-        }.to raise_error Restforce::AuthenticationError, /^invalid_grant: .*/
+        }.to raise_error Force::AuthenticationError, /^invalid_grant: .*/
       end
 
       context 'when an authentication_callback is specified' do

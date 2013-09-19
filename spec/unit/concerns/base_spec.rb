@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Concerns::Base do
+describe Force::Concerns::Base do
   describe '#new' do
     context 'without options passed in' do
       it 'does not raise an exception' do

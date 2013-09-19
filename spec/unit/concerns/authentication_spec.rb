@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Concerns::Authentication do
+describe Force::Concerns::Authentication do
   describe '.authenticate!' do
     subject { lambda { client.authenticate! } }
 
@@ -9,7 +9,7 @@ describe Restforce::Concerns::Authentication do
         client.stub :authentication_middleware => nil
       end
 
-      it { should raise_error Restforce::AuthenticationError, 'No authentication middleware present' }
+      it { should raise_error Force::AuthenticationError, 'No authentication middleware present' }
     end
 
     context 'when there is authentication middleware' do
@@ -36,7 +36,7 @@ describe Restforce::Concerns::Authentication do
         client.stub :username_password? => true
       end
 
-      it { should eq Restforce::Middleware::Authentication::Password }
+      it { should eq Force::Middleware::Authentication::Password }
     end
 
     context 'when oauth options are provided' do
@@ -45,7 +45,7 @@ describe Restforce::Concerns::Authentication do
         client.stub :oauth_refresh? => true
       end
 
-      it { should eq Restforce::Middleware::Authentication::Token }
+      it { should eq Force::Middleware::Authentication::Token }
     end
   end
 

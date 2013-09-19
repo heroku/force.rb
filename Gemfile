@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in restforce.gemspec
+# Specify your gem's dependencies in force.gemspec
 gemspec
 
 gem 'rake'

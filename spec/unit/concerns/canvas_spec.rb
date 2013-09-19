@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Concerns::Canvas do
+describe Force::Concerns::Canvas do
   let(:options) { Hash.new }
 
   before do
@@ -14,8 +14,8 @@ describe Restforce::Concerns::Canvas do
     context 'when the client_secret is set' do
       let(:options) { { :client_secret => 'secret' } }
 
-      it 'delegates to Restforce::SignedRequest' do
-        Restforce::SignedRequest.should_receive(:decode).
+      it 'delegates to Force::SignedRequest' do
+        Force::SignedRequest.should_receive(:decode).
           with(signed_request, options[:client_secret])
         client.decode_signed_request(signed_request)
       end

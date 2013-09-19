@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Concerns::Caching do
+describe Force::Concerns::Caching do
   describe '.without_caching' do
     let(:options) { double('Options') }
 

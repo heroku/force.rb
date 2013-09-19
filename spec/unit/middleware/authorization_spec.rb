@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Middleware::Authorization do
+describe Force::Middleware::Authorization do
   let(:options) { { :oauth_token => 'token' } }
 
   describe '.call' do

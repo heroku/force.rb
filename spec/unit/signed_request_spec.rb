@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::SignedRequest do
+describe Force::SignedRequest do
   let(:client_secret) { 'foo' }
   let(:message) do
     digest = OpenSSL::Digest::Digest.new('sha256')

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Restforce::Collection do
-  let(:client) { double(Restforce::AbstractClient) }
+describe Force::Collection do
+  let(:client) { double(Force::AbstractClient) }
 
   describe '#new' do
     context 'without pagination' do
@@ -15,7 +15,7 @@ describe Restforce::Collection do
       it                   { should have_client client }
 
       describe 'each record' do
-        it { should be_all { |record| expect(record).to be_a Restforce::SObject } }
+        it { should be_all { |record| expect(record).to be_a Force::SObject } }
       end
     end
 
@@ -31,7 +31,7 @@ describe Restforce::Collection do
         before { client.should_receive(:get).never }
 
         its(:size)  { should eq 2 }
-        its(:first) { should be_a Restforce::SObject }
+        its(:first) { should be_a Force::SObject }
         its(:current_page) { should be_a Array }
         its(:current_page) { should have(1).element }
       end
@@ -39,13 +39,13 @@ describe Restforce::Collection do
       context 'when all of the values are being requested' do
         before do
           client.stub(:get).
-            and_return(double(:body => Restforce::Collection.new(next_page, client)))
+            and_return(double(:body => Force::Collection.new(next_page, client)))
         end
 
-        its(:pages)          { should be_all { |page| expect(page).to be_a Restforce::Collection } }
+        its(:pages)          { should be_all { |page| expect(page).to be_a Force::Collection } }
         its(:has_next_page?) { should be_true }
-        it { should be_all   { |record| expect(record).to be_a Restforce::SObject } }
-        its(:next_page)      { should be_a Restforce::Collection }
+        it { should be_all   { |record| expect(record).to be_a Force::SObject } }
+        its(:next_page)      { should be_a Force::Collection }
       end
     end
   end

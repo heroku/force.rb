@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples_for Restforce::AbstractClient do
+shared_examples_for Force::AbstractClient do
   describe '.list_sobjects' do
     requests :sobjects, :fixture => 'sobject/describe_sobjects_success_response'
 
@@ -64,7 +64,7 @@ shared_examples_for Restforce::AbstractClient do
         :with_body => %r(----boundary_string\r\nContent-Disposition: form-data; name=\"entity_content\";\r\nContent-Type: application/json\r\n\r\n{\"Name\":\"Foobar\"}\r\n----boundary_string\r\nContent-Disposition: form-data; name=\"Blob\"; filename=\"blob.jpg\"\r\nContent-Length: 42171\r\nContent-Type: image/jpeg\r\nContent-Transfer-Encoding: binary),
         :fixture => 'sobject/create_success_response'
 
-      subject { client.create('Account', :Name => 'Foobar', :Blob => Restforce::UploadIO.new(File.expand_path('../../fixtures/blob.jpg', __FILE__), 'image/jpeg')) }
+      subject { client.create('Account', :Name => 'Foobar', :Blob => Force::UploadIO.new(File.expand_path('../../fixtures/blob.jpg', __FILE__), 'image/jpeg')) }
       it { should eq 'some_id' }
     end
   end
@@ -225,7 +225,7 @@ shared_examples_for Restforce::AbstractClient do
       end
 
       subject { lambda { authenticate! } }
-      it { should raise_error Restforce::AuthenticationError, 'No authentication middleware present'}
+      it { should raise_error Force::AuthenticationError, 'No authentication middleware present'}
     end
   end
 
@@ -255,7 +255,7 @@ shared_examples_for Restforce::AbstractClient do
       end
 
       subject { lambda { client.query('SELECT some, fields FROM object') } }
-      it { should raise_error Restforce::UnauthorizedError }
+      it { should raise_error Force::UnauthorizedError }
     end
   end
 
@@ -283,9 +283,9 @@ shared_examples_for Restforce::AbstractClient do
   end
 end
 
-describe Restforce::AbstractClient do
+describe Force::AbstractClient do
   describe 'with mashify' do
-    it_behaves_like Restforce::AbstractClient
+    it_behaves_like Force::AbstractClient
 
     describe '.query' do
       context 'with pagination' do
@@ -294,13 +294,13 @@ describe Restforce::AbstractClient do
         requests 'query\?q', :fixture => 'sobject/query_paginated_first_page_response'
         requests 'query/01gD', :fixture => 'sobject/query_paginated_last_page_response'
 
-        it { should be_a Restforce::Collection }
+        it { should be_a Force::Collection }
         its('first.Text_Label') { should eq 'Last Page'}
       end
     end
   end
 
   describe 'without mashify', :mashify => false do
-    it_behaves_like Restforce::AbstractClient
+    it_behaves_like Force::AbstractClient
   end
 end

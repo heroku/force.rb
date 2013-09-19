@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Middleware::Authentication::Token do
+describe Force::Middleware::Authentication::Token do
   let(:options) do
     { :host => 'login.salesforce.com',
       :refresh_token => 'refresh_token',

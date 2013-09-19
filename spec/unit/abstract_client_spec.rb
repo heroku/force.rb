@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Restforce::AbstractClient do
+describe Force::AbstractClient do
   subject { described_class }
 
-  it { should < Restforce::Concerns::Base }
-  it { should < Restforce::Concerns::Connection }
-  it { should < Restforce::Concerns::Authentication }
-  it { should < Restforce::Concerns::Caching }
-  it { should < Restforce::Concerns::API }
+  it { should < Force::Concerns::Base }
+  it { should < Force::Concerns::Connection }
+  it { should < Force::Concerns::Authentication }
+  it { should < Force::Concerns::Caching }
+  it { should < Force::Concerns::API }
 end

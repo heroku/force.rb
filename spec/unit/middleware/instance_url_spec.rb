@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Middleware::InstanceURL do
+describe Force::Middleware::InstanceURL do
   describe '.call' do
     subject { lambda { middleware.call(nil) } }
 
@@ -9,7 +9,7 @@ describe Restforce::Middleware::InstanceURL do
         client.stub_chain :connection, :url_prefix => URI.parse('http:/')
       end
 
-      it { should raise_error Restforce::UnauthorizedError }
+      it { should raise_error Force::UnauthorizedError }
     end
 
     context 'when the instance url is set' do

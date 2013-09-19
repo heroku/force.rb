@@ -34,12 +34,12 @@ module ClientIntegrationExampleGroup
   RSpec.configure do |config|
     config.include self,
       :example_group => {
-        :describes => lambda { |described| described <= Restforce::AbstractClient },
+        :describes => lambda { |described| described <= Force::AbstractClient },
         :file_path => %r{spec/integration}
       }
 
     config.before :mashify => false do
-      client.middleware.delete(Restforce::Middleware::Mashify)
+      client.middleware.delete(Force::Middleware::Mashify)
     end
   end
 end

@@ -1,8 +1,8 @@
-# Restforce
+# Force
 
-[![travis-ci](https://travis-ci.org/ejholmes/restforce.png?branch=master)](https://travis-ci.org/ejholmes/restforce) [![Code Climate](https://codeclimate.com/github/ejholmes/restforce.png)](https://codeclimate.com/github/ejholmes/restforce) [![Dependency Status](https://gemnasium.com/ejholmes/restforce.png)](https://gemnasium.com/ejholmes/restforce)
+[![travis-ci](https://travis-ci.org/ejholmes/force.png?branch=master)](https://travis-ci.org/ejholmes/force) [![Code Climate](https://codeclimate.com/github/ejholmes/force.png)](https://codeclimate.com/github/ejholmes/force) [![Dependency Status](https://gemnasium.com/ejholmes/force.png)](https://gemnasium.com/ejholmes/force)
 
-Restforce is a ruby gem for the [Salesforce REST api](http://www.salesforce.com/us/developer/docs/api_rest/index.htm).
+Force is a ruby gem for the [Salesforce REST api](http://www.salesforce.com/us/developer/docs/api_rest/index.htm).
 It's meant to be a lighter weight alternative to the [databasedotcom gem](https://github.com/heroku/databasedotcom) that offers
 greater flexibility and more advanced functionality.
 
@@ -19,13 +19,13 @@ Features include:
 * Support for dependent picklists.
 * Support for decoding [Force.com Canvas](http://www.salesforce.com/us/developer/docs/platform_connectpre/canvas_framework.pdf) signed requests. (NEW!)
 
-[Documentation](http://rubydoc.info/gems/restforce/frames) | [Changelog](https://github.com/ejholmes/restforce/tree/master/CHANGELOG.md)
+[Documentation](http://rubydoc.info/gems/force/frames) | [Changelog](https://github.com/ejholmes/force/tree/master/CHANGELOG.md)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'restforce'
+    gem 'force'
 
 And then execute:
 
@@ -33,11 +33,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install restforce
+    $ gem install force
 
 ## Usage
 
-Restforce is designed with flexibility and ease of use in mind. By default, all api calls will
+Force is designed with flexibility and ease of use in mind. By default, all api calls will
 return [Hashie::Mash](https://github.com/intridea/hashie/tree/v1.2.0) objects,
 so you can do things like `client.query('select Id, (select Name from Children__r) from Account').Children__r.first.Name`.
 
@@ -55,7 +55,7 @@ authentication method.
 #### OAuth token authentication
 
 ```ruby
-client = Restforce.new :oauth_token => 'oauth token',
+client = Force.new :oauth_token => 'oauth token',
   :instance_url  => 'instance url'
 ```
 
@@ -63,7 +63,7 @@ Although the above will work, you'll probably want to take advantage of the
 (re)authentication middleware by specifying a refresh token, client id and client secret:
 
 ```ruby
-client = Restforce.new :oauth_token => 'oauth token',
+client = Force.new :oauth_token => 'oauth token',
   :refresh_token => 'refresh token',
   :instance_url  => 'instance url',
   :client_id     => 'client_id',
@@ -75,7 +75,7 @@ client = Restforce.new :oauth_token => 'oauth token',
 If you prefer to use a username and password to authenticate:
 
 ```ruby
-client = Restforce.new :username => 'foo',
+client = Force.new :username => 'foo',
   :password       => 'bar',
   :security_token => 'security token',
   :client_id      => 'client_id',
@@ -94,14 +94,14 @@ export SALESFORCE_CLIENT_SECRET="client secret"
 ```
 
 ```ruby
-client = Restforce.new
+client = Force.new
 ```
 ### Proxy Support
 
 You can specify a http proxy using the :proxy_uri option, as follows:
 
 ```ruby
-client = Restforce.new :username => 'foo',
+client = Force.new :username => 'foo',
   :password       => 'bar',
   :security_token => 'security token',
   :client_id      => 'client_id',
@@ -116,16 +116,16 @@ You can connect to sandbox orgs by specifying a host. The default host is
 'login.salesforce.com':
 
 ```ruby
-client = Restforce.new :host => 'test.salesforce.com'
+client = Force.new :host => 'test.salesforce.com'
 ```
 The host can also be set with the environment variable SALESFORCE_HOST.
 
 #### Global configuration
 
-You can set any of the options passed into Restforce.new globally:
+You can set any of the options passed into Force.new globally:
 
 ```ruby
-Restforce.configure do |config|
+Force.configure do |config|
   config.client_id     = 'foo'
   config.client_secret = 'bar'
 end
@@ -145,10 +145,10 @@ works similarly to ActiveRecord.
 
 ```ruby
 accounts = client.query("select Id, Something__c from Account where Id = 'someid'")
-# => #<Restforce::Collection >
+# => #<Force::Collection >
 
 account = accounts.first
-# => #<Restforce::SObject >
+# => #<Force::SObject >
 
 account.sobject_type
 # => 'Account'
@@ -168,10 +168,10 @@ account.destroy
 
 ```ruby
 client.find('Account', '001D000000INjVe')
-# => #<Restforce::SObject Id="001D000000INjVe" Name="Test" LastModifiedBy="005G0000002f8FHIAY" ... >
+# => #<Force::SObject Id="001D000000INjVe" Name="Test" LastModifiedBy="005G0000002f8FHIAY" ... >
 
 client.find('Account', '1234', 'Some_External_Id_Field__c')
-# => #<Restforce::SObject Id="001D000000INjVe" Name="Test" LastModifiedBy="005G0000002f8FHIAY" ... >
+# => #<Force::SObject Id="001D000000INjVe" Name="Test" LastModifiedBy="005G0000002f8FHIAY" ... >
 ```
 
 ### search
@@ -179,7 +179,7 @@ client.find('Account', '1234', 'Some_External_Id_Field__c')
 ```ruby
 # Find all occurrences of 'bar'
 client.search('FIND {bar}')
-# => #<Restforce::Collection >
+# => #<Force::Collection >
 
 # Find accounts match the term 'genepoint' and return the Name field
 client.search('FIND {genepoint} RETURNING Account (Name)').map(&:Name)
@@ -246,13 +246,13 @@ client.describe_layouts('Account', '012E0000000RHEp')
 
 ```ruby
 client.picklist_values('Account', 'Type')
-# => [#<Restforce::Mash label="Prospect" value="Prospect">]
+# => [#<Force::Mash label="Prospect" value="Prospect">]
 
 # Given a custom object named Automobile__c with picklist fields
 # Model__c and Make__c, where Model__c depends on the value of
 # Make__c.
 client.picklist_values('Automobile__c', 'Model__c', :valid_for => 'Honda')
-# => [#<Restforce::Mash label="Civic" value="Civic">, ... ]
+# => [#<Force::Mash label="Civic" value="Civic">, ... ]
 ```
 
 * * *
@@ -267,7 +267,7 @@ information about the user.
 
 ```ruby
 response = client.authenticate!
-# => #<Restforce::Mash access_token="..." id="https://login.salesforce.com/id/00DE0000000cOGcMAM/005E0000001eM4LIAU" instance_url="https://na9.salesforce.com" issued_at="1348465359751" scope="api refresh_token" signature="3fW0pC/TEY2cjK5FCBFOZdjRtCfAuEbK1U74H/eF+Ho=">
+# => #<Force::Mash access_token="..." id="https://login.salesforce.com/id/00DE0000000cOGcMAM/005E0000001eM4LIAU" instance_url="https://na9.salesforce.com" issued_at="1348465359751" scope="api refresh_token" signature="3fW0pC/TEY2cjK5FCBFOZdjRtCfAuEbK1U74H/eF+Ho=">
 
 # Get the user information
 info = client.get(response.id).body
@@ -285,7 +285,7 @@ Using the new [Blob Data](http://www.salesforce.com/us/developer/docs/api_rest/C
 client.create 'Document', FolderId: '00lE0000000FJ6H',
   Description: 'Document test',
   Name: 'My image',
-  Body: Restforce::UploadIO.new(File.expand_path('image.jpg', __FILE__), 'image/jpeg'))
+  Body: Force::UploadIO.new(File.expand_path('image.jpg', __FILE__), 'image/jpeg'))
 ```
 
 Using base64 encoded data (37.5mb limit):
@@ -303,7 +303,7 @@ _See also: http://www.salesforce.com/us/developer/docs/api_rest/Content/dome_sob
 
 ### Downloading Attachments
 
-Restforce also makes it incredibly easy to download Attachments:
+Force also makes it incredibly easy to download Attachments:
 
 ```ruby
 attachment = client.query('select Id, Name, Body from Attachment').first
@@ -314,7 +314,7 @@ File.open(attachment.Name, 'wb') { |f| f.write(attachment.Body) }
 
 ### Custom Apex REST endpoints
 
-You can use Restforce to interact with your custom REST endpoints, by using
+You can use Force to interact with your custom REST endpoints, by using
 `.get`, `.put`, `.patch`, `.post`, and `.delete`.
 
 For example, if you had the following Apex REST endpoint on Salesforce:
@@ -333,26 +333,26 @@ global class RESTCaseController {
 }
 ```
 
-Then you could query the cases using Restforce:
+Then you could query the cases using Force:
 
 ```ruby
 client.get '/services/apexrest/FieldCase', :company => 'GenePoint'
-# => #<Restforce::Collection ...>
+# => #<Force::Collection ...>
 ```
 
 * * *
 
 ### Streaming
 
-Restforce supports the [Streaming API](http://wiki.developerforce.com/page/Getting_Started_with_the_Force.com_Streaming_API), and makes implementing
+Force supports the [Streaming API](http://wiki.developerforce.com/page/Getting_Started_with_the_Force.com_Streaming_API), and makes implementing
 pub/sub with Salesforce a trivial task:
 
 ```ruby
-# Restforce uses faye as the underlying implementation for CometD.
+# Force uses faye as the underlying implementation for CometD.
 require 'faye'
 
 # Initialize a client with your username/password/oauth token/etc.
-client = Restforce.new :username => 'foo',
+client = Force.new :username => 'foo',
   :password       => 'bar',
   :security_token => 'security token'
   :client_id      => 'client_id',
@@ -389,10 +389,10 @@ The gem supports easy caching of GET requests (e.g. queries):
 
 ```ruby
 # rails example:
-client = Restforce.new cache: Rails.cache
+client = Force.new cache: Rails.cache
 
 # or
-Restforce.configure do |config|
+Force.configure do |config|
   config.cache = Rails.cache
 end
 ```
@@ -410,22 +410,22 @@ end
 
 ### Logging/Debugging/Instrumenting
 
-You can easily inspect what Restforce is sending/receiving by setting
-`Restforce.log = true`.
+You can easily inspect what Force is sending/receiving by setting
+`Force.log = true`.
 
 ```ruby
-Restforce.log = true
-client = Restforce.new.query('select Id, Name from Account')
+Force.log = true
+client = Force.new.query('select Id, Name from Account')
 ```
 
-Another awesome feature about restforce is that, because it is based on
+Another awesome feature about force is that, because it is based on
 Faraday, you can insert your own middleware. For example, if you were using
-Restforce in a rails app, you can setup custom reporting to
+Force in a rails app, you can setup custom reporting to
 [Librato](https://github.com/librato/librato-rails) using ActiveSupport::Notifications:
 
 ```ruby
-client = Restforce.new do |builder|
-  builder.insert_after Restforce::Middleware::InstanceURL,
+client = Force.new do |builder|
+  builder.insert_after Force::Middleware::InstanceURL,
     FaradayMiddleware::Instrumentation, name: 'request.salesforce'
 end
 
@@ -439,15 +439,15 @@ end
 
 ## Force.com Canvas
 
-You can use Restforce to decode signed requests from Salesforce. See [the example app](https://gist.github.com/4052312).
+You can use Force to decode signed requests from Salesforce. See [the example app](https://gist.github.com/4052312).
 
 ## Tooling API
 
 To use the [Tooling API](http://www.salesforce.com/us/developer/docs/api_toolingpre/api_tooling.pdf),
-call `Restforce.tooling` instead of `Restforce.new`:
+call `Force.tooling` instead of `Force.new`:
 
 ```ruby
-client = Restforce.tooling(...)
+client = Force.tooling(...)
 ```
 
 ## Contributing
@@ -458,4 +458,4 @@ client = Restforce.tooling(...)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-[Restforce::Collection]: https://github.com/ejholmes/restforce/blob/master/lib/restforce/collection.rb "Restforce::Collection"
+[Force::Collection]: https://github.com/ejholmes/force/blob/master/lib/force/collection.rb "Force::Collection"

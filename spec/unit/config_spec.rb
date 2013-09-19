@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce do
+describe Force do
   before do
     ENV['SALESFORCE_USERNAME']       = nil
     ENV['SALESFORCE_PASSWORD']       = nil
@@ -10,13 +10,13 @@ describe Restforce do
   end
 
   after do
-    Restforce.instance_variable_set :@configuration, nil
+    Force.instance_variable_set :@configuration, nil
   end
 
   describe '#configuration' do
-    subject { Restforce.configuration }
+    subject { Force.configuration }
 
-    it { should be_a Restforce::Configuration }
+    it { should be_a Force::Configuration }
 
     context 'by default' do
       its(:api_version)            { should eq '26.0' }
@@ -57,16 +57,16 @@ describe Restforce do
      :oauth_token, :refresh_token, :instance_url, :api_version, :host, :authentication_retries,
      :proxy_uri, :authentication_callback].each do |attr|
       it "allows #{attr} to be set" do
-        Restforce.configure do |config|
+        Force.configure do |config|
           config.send("#{attr}=", 'foobar')
         end
-        expect(Restforce.configuration.send(attr)).to eq 'foobar'
+        expect(Force.configuration.send(attr)).to eq 'foobar'
       end
     end
   end
 
   describe '#log?' do
-    subject { Restforce.log? }
+    subject { Force.log? }
 
     context 'by default' do
       it { should be_false }
@@ -76,23 +76,23 @@ describe Restforce do
   describe '#log' do
     context 'with logging disabled' do
       before do
-        Restforce.stub :log? => false
+        Force.stub :log? => false
       end
 
       it 'doesnt log anytning' do
-        Restforce.configuration.logger.should_not_receive(:debug)
-        Restforce.log 'foobar'
+        Force.configuration.logger.should_not_receive(:debug)
+        Force.log 'foobar'
       end
     end
 
     context 'with logging enabled' do
       before do
-        Restforce.stub :log? => true
-        Restforce.configuration.logger.should_receive(:debug).with('foobar')
+        Force.stub :log? => true
+        Force.configuration.logger.should_receive(:debug).with('foobar')
       end
 
       it 'logs something' do
-        Restforce.log 'foobar'
+        Force.log 'foobar'
       end
     end
   end

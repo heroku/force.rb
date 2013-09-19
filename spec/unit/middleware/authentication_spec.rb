@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Middleware::Authentication do
+describe Force::Middleware::Authentication do
   let(:options) do
     { :host => 'login.salesforce.com',
       :proxy_uri => 'https://not-a-real-site.com',
@@ -28,10 +28,10 @@ describe Restforce::Middleware::Authentication do
         env.stub :body => 'foo', :request => { :proxy => nil }
         middleware.stub :authenticate!
         app.should_receive(:call).once.
-          and_raise(Restforce::UnauthorizedError.new('something bad'))
+          and_raise(Force::UnauthorizedError.new('something bad'))
       end
 
-      it { should raise_error Restforce::UnauthorizedError }
+      it { should raise_error Force::UnauthorizedError }
     end
   end
 
@@ -46,21 +46,21 @@ describe Restforce::Middleware::Authentication do
 
       context 'with logging disabled' do
         before do
-          Restforce.stub :log? => false
+          Force.stub :log? => false
         end
 
         its(:handlers) { should include FaradayMiddleware::ParseJson,
           Faraday::Adapter::NetHttp }
-        its(:handlers) { should_not include Restforce::Middleware::Logger  }
+        its(:handlers) { should_not include Force::Middleware::Logger  }
       end
 
       context 'with logging enabled' do
         before do
-          Restforce.stub :log? => true
+          Force.stub :log? => true
         end
 
         its(:handlers) { should include FaradayMiddleware::ParseJson,
-          Restforce::Middleware::Logger, Faraday::Adapter::NetHttp }
+          Force::Middleware::Logger, Faraday::Adapter::NetHttp }
       end
     end
   end

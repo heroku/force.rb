@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Concerns::Connection do
+describe Force::Concerns::Connection do
   describe '.middleware' do
     subject       { client.middleware }
     let(:builder) { double('Faraday::Builder') }

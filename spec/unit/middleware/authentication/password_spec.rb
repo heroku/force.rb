@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Middleware::Authentication::Password do
+describe Force::Middleware::Authentication::Password do
   let(:options) do
     { :host => 'login.salesforce.com',
       :username => 'foo',

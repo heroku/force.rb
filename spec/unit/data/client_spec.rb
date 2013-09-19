@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Restforce::Client do
+describe Force::Client do
   subject { described_class }
 
-  it { should < Restforce::AbstractClient }
-  it { should < Restforce::Concerns::Picklists }
-  it { should < Restforce::Concerns::Streaming }
-  it { should < Restforce::Concerns::Canvas }
+  it { should < Force::AbstractClient }
+  it { should < Force::Concerns::Picklists }
+  it { should < Force::Concerns::Streaming }
+  it { should < Force::Concerns::Canvas }
 end

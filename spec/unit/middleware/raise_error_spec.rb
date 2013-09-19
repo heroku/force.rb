@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Restforce::Middleware::RaiseError do
+describe Force::Middleware::RaiseError do
   let(:body)       { fixture('sobject/query_error_response') }
   let(:env)        { { :status => status, :body => body } }
   let(:middleware) { described_class.new app }
@@ -20,7 +20,7 @@ describe Restforce::Middleware::RaiseError do
 
     context 'when the status code is 401' do
       let(:status) { 401 }
-      it { should raise_error Restforce::UnauthorizedError, 'INVALID_FIELD: error_message' }
+      it { should raise_error Force::UnauthorizedError, 'INVALID_FIELD: error_message' }
     end
 
     context 'when the status code is 413' do

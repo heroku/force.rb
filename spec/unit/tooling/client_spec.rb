@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Restforce::Tooling::Client do
+describe Force::Tooling::Client do
   subject { described_class }
 
-  it { should < Restforce::AbstractClient }
+  it { should < Force::AbstractClient }
 end

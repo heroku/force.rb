@@ -55,14 +55,14 @@
 
 ## 1.0.4 (Jan 8, 2013)
 
-*   `Restforce::Client#inspect` now only prints out the options and not the
+*   `Force::Client#inspect` now only prints out the options and not the
     Faraday connection.
 
 *   The Faraday adapter is now configurabled:
 
     Example:
 
-        Restforce.configure do |config|
+        Force.configure do |config|
           config.adapter = :excon
         end
 
@@ -70,7 +70,7 @@
 
     Example:
 
-        Restforce.configure do |config|
+        Force.configure do |config|
           config.timeout = 300
         end
 
