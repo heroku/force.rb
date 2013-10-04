@@ -1,6 +1,5 @@
 module Force
   class Attachment < Force::SObject
-
     # Public: Returns the body of the attachment.
     #
     # Examples
@@ -18,6 +17,5 @@ module Force
       return true if self.Body?
       raise 'You need to query the Body for the record first.'
     end
-
   end
 end

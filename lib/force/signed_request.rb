@@ -29,6 +29,7 @@ module Force
     end
     
   private
+
     attr_reader :client_secret, :signature, :payload
 
     def split_components(signed_request)
@@ -43,6 +44,5 @@ module Force
     def digest
       OpenSSL::Digest::Digest.new('sha256')
     end
-
   end
 end

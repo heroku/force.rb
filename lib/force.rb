@@ -69,5 +69,6 @@ module Force
       self
     end
   end
+  
   Object.send :include, Force::CoreExtensions unless Object.respond_to? :tap
 end
