@@ -10,7 +10,8 @@ module Force
         env[:request_headers][CONTENT_TYPE] += ";boundary=#{env[:request][:boundary]}"
         env[:body] = create_multipart(env, params)
       end
-      @app.call env
+
+      @app.call(env)
     end
 
     def process_request?(env)
@@ -28,17 +29,17 @@ module Force
           return true if (val.respond_to?(:content_type) || has_multipart?(val))
         end
       end
-      false
+      
+      return false
     end
 
     def create_multipart(env, params)
       boundary = env[:request][:boundary]
+      
       parts = []
 
-      # Fields
       parts << Faraday::Parts::Part.new(boundary, 'entity_content', params.reject { |k,v| v.respond_to? :content_type }.to_json)
 
-      # Files
       params.each do |k,v|
         parts << Faraday::Parts::Part.new(boundary, k.to_s, v) if v.respond_to? :content_type
       end
@@ -47,6 +48,7 @@ module Force
 
       body = Faraday::CompositeReadIO.new(parts)
       env[:request_headers]['Content-Length'] = body.length.to_s
+      
       return body
     end
   end

@@ -62,10 +62,12 @@ module Force
       end
     end
 
-  private
+    private
+
     def faraday_options
       { :url   => "https://#{@options[:host]}",
-        :proxy => @options[:proxy_uri] }.reject { |k, v| v.nil? }
+        :proxy => @options[:proxy_uri] 
+      }.reject { |k, v| v.nil? }
     end
   end
 end

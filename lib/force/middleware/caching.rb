@@ -1,6 +1,5 @@
 module Force
   class Middleware::Caching < FaradayMiddleware::Caching
-
     def call(env)
       expire(cache_key(env)) unless use_cache?
       super
@@ -19,6 +18,5 @@ module Force
     def use_cache?
       !@options.has_key?(:use_cache) || @options[:use_cache]
     end
-
   end
 end
