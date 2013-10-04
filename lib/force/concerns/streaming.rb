@@ -1,7 +1,6 @@
 module Force
   module Concerns
     module Streaming
-
       # Public: Subscribe to a PushTopic
       #
       # channels - The name of the PushTopic channel(s) to subscribe to.
@@ -15,17 +14,18 @@ module Force
       # Public: Faye client to use for subscribing to PushTopics
       def faye
         raise 'Instance URL missing. Call .authenticate! first.' unless options[:instance_url]
+        
         @faye ||= Faye::Client.new("#{options[:instance_url]}/cometd/#{options[:api_version]}").tap do |client|
           client.bind 'transport:down' do
             Force.log "[COMETD DOWN]"
             client.set_header 'Authorization', "OAuth #{authenticate!.access_token}"
           end
+
           client.bind 'transport:up' do
             Force.log "[COMETD UP]"
           end
         end
       end
-
     end
   end
 end

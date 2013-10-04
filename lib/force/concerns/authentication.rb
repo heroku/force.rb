@@ -34,7 +34,6 @@ module Force
           options[:client_id] &&
           options[:client_secret]
       end
-
     end
   end
 end

@@ -300,7 +300,7 @@ module Force
         api_get(field ? "sobjects/#{sobject}/#{field}/#{id}" : "sobjects/#{sobject}/#{id}").body
       end
 
-    private
+      private
 
       # Internal: Returns a path to an api endpoint
       #
@@ -316,7 +316,6 @@ module Force
       def exceptions
         [Faraday::Error::ClientError]
       end
-
     end
   end
 end

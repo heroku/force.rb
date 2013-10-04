@@ -1,7 +1,6 @@
 module Force
   module Concerns
     module Picklists
-
       # Public: Get the available picklist values for a picklist or multipicklist field.
       #
       # sobject - The String name of the sobject.
@@ -27,7 +26,7 @@ module Force
         PicklistValues.new(describe(sobject)['fields'], field, options)
       end
 
-    private
+      private
 
       class PicklistValues < Array
 
@@ -82,9 +81,7 @@ module Force
           valid_for = picklist_entry['validFor'].ljust(16, 'A').unpack('m').first.unpack('q*')
           (valid_for[index >> 3] & (0x80 >> index % 8)) != 0
         end
-
       end
-
     end
   end
 end

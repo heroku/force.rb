@@ -1,7 +1,6 @@
 module Force
   module Concerns
     module Connection
-
       # Public: The Faraday::Builder instance used for the middleware stack. This
       # can be used to insert an custom middleware.
       #
@@ -14,9 +13,10 @@ module Force
       def middleware
         connection.builder
       end
+
       alias_method :builder, :middleware
 
-    private
+      private
 
       # Internal: Internal faraday connection where all requests go through
       def connection
@@ -68,7 +68,6 @@ module Force
       def mashify?
         middleware.handlers.index(Force::Middleware::Mashify)
       end
-
     end
   end
 end

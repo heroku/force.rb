@@ -1,12 +1,11 @@
 module Force
   module Concerns
     module Base
-
       attr_reader :options
 
       # Public: Creates a new client instance
       #
-      # opts - A hash of options to be passed in (default: {}).
+      # options - A hash of options to be passed in (default: {}).
       #        :username               - The String username to use (required for password authentication).
       #        :password               - The String password to use (required for password authentication).
       #        :security_token         - The String security token to use (required for password authentication).
@@ -40,10 +39,10 @@ module Force
       #
       #        :authentication_callback
       #                                - A Proc that is called with the response body after a successful authentication.
-      def initialize(opts = {})
-        raise ArgumentError, 'Please specify a hash of options' unless opts.is_a?(Hash)
+      def initialize(options = {})        
         @options = Hash[Force.configuration.options.map { |option| [option, Force.configuration.send(option)] }]
-        @options.merge! opts
+        @options.merge!(options)
+
         yield builder if block_given?
       end
 
@@ -55,7 +54,6 @@ module Force
       def inspect
         "#<#{self.class} @options=#{@options.inspect}>"
       end
-
     end
   end
 end
