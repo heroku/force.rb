@@ -10,14 +10,6 @@ describe Force::Concerns::Base do
       end
     end
 
-    context 'with a non-hash value' do
-      it 'raises an ArgumentError exception' do
-        expect {
-          klass.new 'foo'
-        }.to raise_error ArgumentError, 'Please specify a hash of options'
-      end
-    end
-
     it 'yields the builder to the block' do
       klass.any_instance.stub :builder
       expect { |b| klass.new(&b) }.to yield_control
