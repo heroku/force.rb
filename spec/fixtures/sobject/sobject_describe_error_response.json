@@ -1,4 +1,6 @@
-[ {
-  "message" : "The requested resource does not exist",
-  "errorCode" : "NOT_FOUND"
-} ]
+[
+  {
+    "message": "The requested resource does not exist",
+    "errorCode": "NOT_FOUND"
+  }
+]

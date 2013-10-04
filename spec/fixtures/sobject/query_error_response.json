@@ -1,4 +1,6 @@
-[ {
-  "message" : "error_message",
-  "errorCode" : "INVALID_FIELD"
-} ]
+[
+  {
+    "message": "error_message",
+    "errorCode": "INVALID_FIELD"
+  }
+]
