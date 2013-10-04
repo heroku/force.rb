@@ -4,8 +4,8 @@ require File.expand_path('../lib/force/version', __FILE__)
 Gem::Specification.new do |s|
   s.name          = "force"
   s.version       = Force::VERSION
-  s.authors       = ["Eric J. Holmes"]
-  s.email         = ["eric@ejholmes.net"]
+  s.authors       = ["Eric J. Holmes", "Mattt Thompson"]
+  s.email         = ["eric@ejholmes.net", "mattt@heroku.com"]
   s.description   = "A lightweight ruby client for the Salesforce REST api."
   s.summary       = "A lightweight ruby client for the Salesforce REST api."
   s.homepage      = "https://github.com/heroku/force"
