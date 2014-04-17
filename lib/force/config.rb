@@ -111,6 +111,9 @@ module Force
     # Set this to an object that responds to read, write and fetch and all GET
     # requests will be cached.
     option :cache
+    
+    # Flag to determine whether to use Mashify Middleware or not
+    option :mashify
 
     # The number of times reauthentication should be tried before failing.
     option :authentication_retries, :default => 3
