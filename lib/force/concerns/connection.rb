@@ -22,7 +22,7 @@ module Force
       def connection
         @connection ||= Faraday.new(options[:instance_url], connection_options) do |builder|
           # Parses JSON into Hashie::Mash structures.
-          builder.use      Force::Middleware::Mashify, self, options unless options.mashify == false
+          builder.use      Force::Middleware::Mashify, self, options unless options[:mashify] == false
           # Handles multipart file uploads for blobs.
           builder.use      Force::Middleware::Multipart
           # Converts the request into JSON.
