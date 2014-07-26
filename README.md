@@ -50,7 +50,7 @@ authentication method.
 
 ```ruby
 client = Force.new :instance_url => 'xx.salesforce.com',
-                   :oauth_token => '...' 
+                   :oauth_token => '...'
 ```
 
 Although the above will work, you'll probably want to take advantage of the
@@ -215,8 +215,8 @@ client.describe_layouts('Account', '012E0000000RHEp') # => { ... }
 ```ruby
 client.picklist_values('Account', 'Type') # => [#<Force::Mash label="Prospect" value="Prospect">]
 
-# Given a custom object named Automobile__c 
-#   with picklist fields Model__c and Make__c, 
+# Given a custom object named Automobile__c
+#   with picklist fields Model__c and Make__c,
 #   where Model__c depends on the value of Make__c.
 client.picklist_values('Automobile__c', 'Model__c', :valid_for => 'Honda')
 # => [#<Force::Mash label="Civic" value="Civic">, ... ]
@@ -376,7 +376,7 @@ Force.log = true
 client = Force.new.query('select Id, Name from Account')
 ```
 
-Another awesome feature about force is that, because it is based on Faraday, you can insert your own middleware. 
+Another awesome feature about force is that, because it is based on Faraday, you can insert your own middleware.
 
 For example, if you were using Force in a Rails app, you can setup custom reporting to [Librato](https://github.com/librato/librato-rails) using ActiveSupport::Notifications:
 
@@ -409,6 +409,10 @@ call `Force.tooling` instead of `Force.new`:
 ```ruby
 client = Force.tooling(...)
 ```
+
+## Security note
+
+Always sanitize your raw SOQL queries. To avoid SQL-injection (in this case, [SOSQL-injection](https://developer.salesforce.com/page/Secure_Coding_SQL_Injection)) attacks. Given the syntax similarities between SQL and SOQL, [Salesforce recommends using ActiveRecord's sanitization methods](https://developer.salesforce.com/page/Secure_Coding_SQL_Injection#Ruby_on_Rails).
 
 ---
 
