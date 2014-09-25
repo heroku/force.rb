@@ -1,5 +1,15 @@
 # Force
 
+**PLEASE NOTE. THIS LIBRARY IS NO LONGER BEING MAINTAINED.**
+
+Please use the original version instead: 
+
+    https://github.com/ejholmes/restforce
+
+That version is being actively maintained.
+
+** _______________________________________________________ **
+
 _A ruby gem for the [Salesforce REST api](http://www.salesforce.com/us/developer/docs/api_rest/index.htm)._
 
 ## Features
@@ -418,7 +428,7 @@ Always sanitize your raw SOQL queries. To avoid SQL-injection (in this case, [SO
 
 ## Contact
 
-- Mattt Thompson <mattt@heroku.com>
+- Scott Persinger <scottp@heroku.com>
 
 ## License
 
