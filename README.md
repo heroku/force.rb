@@ -4,7 +4,7 @@
 
 Please use the original version instead: 
 
-    https://github.com/ejholmes/restforce
+[https://github.com/ejholmes/restforce](https://github.com/ejholmes/restforce)
 
 That version is being actively maintained.
 
