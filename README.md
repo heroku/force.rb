@@ -8,7 +8,7 @@ Please use the original version instead:
 
 That version is being actively maintained.
 
-** _______________________________________________________ **
+**_______________________________________________________**
 
 _A ruby gem for the [Salesforce REST api](http://www.salesforce.com/us/developer/docs/api_rest/index.htm)._
 
