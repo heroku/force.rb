@@ -29,15 +29,14 @@ _A ruby gem for the [Salesforce REST api](http://www.salesforce.com/us/developer
 
 Add this line to your application's Gemfile:
 
-    gem 'force'
+    gem 'force', :git => 'https://github.com/heroku/force.rb'
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install force
+Warning: Do not install the gem from rubygems.org as it hosts a deprecated version:
+If you dont use Bundler, download the gem and build it locally.
 
 ## Usage
 
