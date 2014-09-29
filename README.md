@@ -109,7 +109,7 @@ You can specify a http proxy using the :proxy_uri option, as follows:
 client = Force.new :proxy_uri => 'http://proxy.example.com:123'
 ```
 
-This paramter also will accept `http://user@password:proxy.example.com:123` or using the environemnt variable `PROXY_URI`.
+This paramter also will accept `http://user@password:proxy.example.com:123` or using the environment variable `PROXY_URI`.
 
 #### Sandbox Orgs
 
