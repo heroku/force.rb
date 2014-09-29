@@ -41,5 +41,10 @@ module Force
     def next_page
       @next_page ||= @client.get(@raw_page['nextRecordsUrl']).body if has_next_page?
     end
+    
+    # Exports the Collection as a JSON array
+    def to_json
+      self.map { |element| element }.to_json
+    end
   end
 end
