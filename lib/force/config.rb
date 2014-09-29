@@ -56,7 +56,7 @@ module Force
       end
 
     private
-    
+
       attr_reader :default
       alias_method :default_provided?, :default
 
@@ -128,6 +128,9 @@ module Force
 
     # A Proc that is called with the response body after a successful authentication.
     option :authentication_callback
+
+    # Set ssl options
+    option :ssl, :default => {:verify => true}
 
     def logger
       @logger ||= ::Logger.new STDOUT
